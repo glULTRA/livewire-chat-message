@@ -28,12 +28,24 @@ class ChatBox extends Component
         ];
     }
 
-    public function broadcastedMessageReceived(){
-        dd('dsaijsdai');
+    public function broadcastedMessageReceived($event){
+        // dd($event);
+        $this->emitTo('chat.chat-list', 'refresh');
+
+
+        $broadcastedMessage = Message::find($event['message']);
+        if($this->selectedConversation){
+            if((int) $this->selectedConversation->id === (int) $event['conversation_id']){
+                $broadcastedMessage->read = 1;
+                $broadcastedMessage->save();
+
+                $this->pushMessage($broadcastedMessage->id);
+            }
+        }
     }
 
-    public function pushMessage($messageId){
-        $newMessage = Message::find($messageId);
+    public function pushMessage(Message $newMessage){
+        // $newMessage = Message::find($messageId);
         $this->messages->push($newMessage);
         $this->dispatchBrowserEvent('rowChatToBottom');
     }

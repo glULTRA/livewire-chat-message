@@ -35,10 +35,15 @@ class SendMessage extends Component
             'body' => $this->body,
         ]);
 
+        
+        
         $this->createdMessage = $createdMessage;
-
+        
         $this->selectedConversation->last_time_message = $createdMessage->created_at;
         $this->selectedConversation->save();
+        
+        // $this->emitSelf('dispatchMessageSent');
+        // $this->dispatchMessageSent();
 
 
         $this->emitTo('chat.chat-box','pushMessage', $createdMessage->id);

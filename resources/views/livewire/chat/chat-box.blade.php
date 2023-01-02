@@ -32,7 +32,7 @@
 
     <div class="chatbox_body">
         @foreach ($messages as $message)
-        <div wire:key='{{ $message->id }}'
+        <div
             class="msg_body @if(auth()->id() == $message->sender_id) msg_body_me @else msg_body_receiver  @endif "
             @if(auth()->id() == $message->sender_id) style="background-color: #1f2937 ;color:white; width:80%;max-width:80%;max-width:max-content;" @endif>
             {{$message->body}}

@@ -17,7 +17,8 @@ class ChatList extends Component
 
     protected $listeners = [
         'chatUserSelected',
-        'updateChatLists'
+        'updateChatLists',
+        'refresh' => '$refresh'
     ];
 
     public function updateChatLists(){
