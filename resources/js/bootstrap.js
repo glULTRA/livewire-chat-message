@@ -39,8 +39,8 @@ window.Echo = new Echo({
     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
-    encrypted: true,
     cluster: 'ap2',
+    encrypted: true,
 });
 
 // var channel = Echo.channel('chat.2');
