@@ -44,8 +44,8 @@ class ChatBox extends Component
         }
     }
 
-    public function pushMessage(Message $newMessage){
-        // $newMessage = Message::find($messageId);
+    public function pushMessage($newMessage){
+        $newMessage = Message::find($newMessage);
         $this->messages->push($newMessage);
         $this->dispatchBrowserEvent('rowChatToBottom');
     }

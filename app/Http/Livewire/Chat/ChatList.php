@@ -53,8 +53,15 @@ class ChatList extends Component
             ->orderBy('last_time_message', 'DESC')->get();
         
         $first_conv = $this->conversations->first();
-        $this->chatUserSelected($first_conv, $first_conv->receiver_id);
-        $this->emitTo('chat.chat-box','loadConversation',$first_conv, $first_conv->receiver_id);
+        try {
+            //code...
+            $this->chatUserSelected($first_conv, $first_conv->receiver_id);
+            $this->emitTo('chat.chat-box','loadConversation',$first_conv, $first_conv->receiver_id);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            $this->emitTo('chat.chat-box','loadConversation',$first_conv, $first_conv?->receiver_id);
+        }
 
         // loadConversation($first_conv, $first_conv->receiver_id);
         // dd($first_conv, $first_conv->receiver_id);
